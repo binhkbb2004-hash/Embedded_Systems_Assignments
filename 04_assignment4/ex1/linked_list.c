@@ -9,11 +9,9 @@ struct Node {
 void insert(struct Node** head_ref, int new_data) {
     // Cap phat bo nho cho Node moi
     struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
-    
     // Gan du lieu va tro next cua Node moi toi Node dau tien hien tai
     new_node->data = new_data;
     new_node->next = (*head_ref);
-    
     // Cap nhat lai con tro head de tro toi Node moi
     (*head_ref) = new_node;
     printf("Da them: %d\n", new_data);
@@ -31,7 +29,6 @@ int search(struct Node* head, int key) {
 //------------------------------ 4. Ham Delete: Xoa 1 Node chua gia tri cu the
 void deleteNode(struct Node** head_ref, int key) {
     struct Node *temp = *head_ref, *prev = NULL;
-
     // Neu Node can xoa nam ngay dau danh sach
     if (temp != NULL && temp->data == key) {
         *head_ref = temp->next; // Chuyen head sang Node thu 2
@@ -39,26 +36,22 @@ void deleteNode(struct Node** head_ref, int key) {
         printf("Da xoa: %d\n", key);
         return;
     }
-
     // Tim Node can xoa và giu lai Node dung ngay truoc no (prev)
     while (temp != NULL && temp->data != key) {
         prev = temp;
         temp = temp->next;
     }
-
     // Neu duyet he ma khong tim thay
     if (temp == NULL) {
         printf("Khong tim thay %d de xoa.\n", key);
         return;
     }
-
     // Bo qua Node can xoa bang cach noi Node truoc voi Node sau
     prev->next = temp->next;
     free(temp); // Giai phong bo nho
     printf("Da xoa: %d\n", key);
 }
-
-// Ham in danh sach
+//----------------------------------- Ham in danh sach
 void printList(struct Node* node) {
     printf("Danh sach hien tai: ");
     while (node != NULL) {
@@ -67,12 +60,10 @@ void printList(struct Node* node) {
     }
     printf("NULL\n");
 }
-
-// 5. Ham Free Memory
+//----------------------------------- 5. Ham Free Memory
 void freeList(struct Node** head_ref) {
     struct Node* current = *head_ref;
     struct Node* next_node;
-
     while (current != NULL) {
         next_node = current->next; // Luu lai dia chi Node tiep theo
         free(current);             // Giai phong Node hien tai
