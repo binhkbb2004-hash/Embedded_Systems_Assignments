@@ -8,15 +8,15 @@
 #define MAXLEN 1000
 
 char *lineptr[MAXLINES]; // Mảng lưu các dòng đọc vào
-int numeric = 0;         // Cờ sắp xếp kiểu số
-int fold = 0;            // Cờ sắp xếp không phân biệt hoa thường
-int field = 1;           // Cột/Trường cần sắp xếp
+int numeric = 0; // Cờ sắp xếp kiểu số
+int fold = 0; // Cờ sắp xếp không phân biệt hoa thường
+int field = 1; // Cột/Trường cần sắp xếp
 
-// Hàm trích xuất từ thứ 'n' (cột n) ra khỏi một dòng
+// Hàm trích xuất từ thứ n cột n ra khỏi 1 dòng
 void get_field(char *line, int n, char *word) {
     int i, j = 0, curr_field = 1;
     int len = strlen(line);
-    word[0] = '\0'; // Mặc định chuỗi rỗng nếu không tìm thấy
+    word[0] = '\0'; // chuỗi rỗng nếu không tìm thấy
 
     for (i = 0; i < len; i++) {
         if (isspace(line[i])) {
@@ -58,7 +58,7 @@ int compare_lines(const void *p1, const void *p2) {
     } else if (fold) {
         return strcasecmp(word1, word2); // So sánh không phân biệt hoa thường
     } else {
-        return strcmp(word1, word2);     // So sánh chuỗi tiêu chuẩn
+        return strcmp(word1, word2); // So sánh chuỗi tiêu chuẩn
     }
 }
 
@@ -79,7 +79,7 @@ int readlines(char *lineptr[], int maxlines) {
 }
 
 int main(int argc, char *argv[]) {
-    // 1. Phân tích các đối số dòng lệnh
+    // Phân tích các đối số dòng lệnh
     for (int i = 1; i < argc; i++) {
         if (strcmp(argv[i], "-n") == 0) {
             numeric = 1;
@@ -90,17 +90,17 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    // 2. Đọc dữ liệu đầu vào
+    // Đọc dữ liệu đầu vào
     int nlines = readlines(lineptr, MAXLINES);
 
-    // 3. Tiến hành sắp xếp
+    // sắp xếp
     qsort(lineptr, nlines, sizeof(char *), compare_lines);
 
-    // 4. In kết quả
+    // In kết quả
     printf("\n--- KET QUA SAP XEP ---\n");
     for (int i = 0; i < nlines; i++) {
         printf("%s\n", lineptr[i]);
-        free(lineptr[i]); // Dọn dẹp bộ nhớ đã malloc
+        free(lineptr[i]);
     }
 
     return 0;
