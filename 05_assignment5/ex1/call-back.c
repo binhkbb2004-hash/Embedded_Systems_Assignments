@@ -2,29 +2,26 @@
 #include <stdlib.h>
 #include <string.h>
 
-// 1. Định nghĩa cấu trúc bản ghi cho 1 người
+//cấu trúc bản ghi cho 1 người
 typedef struct {
     char firstname[50];
     char lastname[50];
     int age;
 } Record;
 
-// ==========================================
 // YÊU CẦU 1: CÁC HÀM CALLBACK CHO QSORT
-// ==========================================
 
-// Hàm callback để sắp xếp theo Tên (First Name)
-// qsort yêu cầu tham số là kiểu con trỏ vô kiểu (const void*)
+// Hàm callback để sắp xếp theo Tên
 int compare_firstname(const void* pa, const void* pb) {
     // Ép kiểu con trỏ vô kiểu về lại con trỏ Record
     const Record* r1 = (const Record*)pa;
     const Record* r2 = (const Record*)pb;
     
-    // Sử dụng strcmp để so sánh 2 chuỗi (trả về <0, 0, hoặc >0)
+    // Sử dụng strcmp để so sánh 2 chuỗi
     return strcmp(r1->firstname, r2->firstname);
 }
 
-// Hàm callback để sắp xếp theo Họ (Last Name)
+// Hàm callback để sắp xếp theo Họ
 int compare_lastname(const void* pa, const void* pb) {
     const Record* r1 = (const Record*)pa;
     const Record* r2 = (const Record*)pb;
@@ -32,9 +29,7 @@ int compare_lastname(const void* pa, const void* pb) {
     return strcmp(r1->lastname, r2->lastname);
 }
 
-// ==========================================
 // YÊU CẦU 2: HÀM APPLY VÀ ISOLDER
-// ==========================================
 
 // Hàm isolder: In ra màn hình nếu tuổi > 20
 void isolder(Record* rec) {
@@ -43,18 +38,14 @@ void isolder(Record* rec) {
     }
 }
 
-// Hàm apply: Duyệt qua mảng và gọi một hàm callback (fp) cho từng phần tử
+// Hàm apply: Duyệt qua mảng và gọi một hàm callback cho từng phần tử
 void apply(Record* arr, int num, void (*fp)(Record*)) {
     for (int i = 0; i < num; i++) {
-        fp(&arr[i]); // Truyền địa chỉ của từng bản ghi vào hàm callback
+        fp(&arr[i]); // Truyền địa chỉ vào hàm callback
     }
 }
 
-// ==========================================
-// HÀM MAIN ĐỂ CHẠY THỬ
-// ==========================================
-
-// Hàm phụ trợ để in toàn bộ mảng
+// Hàm in toàn bộ mảng
 void print_array(Record* arr, int num) {
     for(int i = 0; i < num; i++){
         printf("  %s %s, Age: %d\n", arr[i].firstname, arr[i].lastname, arr[i].age);
@@ -63,12 +54,12 @@ void print_array(Record* arr, int num) {
 }
 
 int main() {
-    // Khởi tạo một mảng chứa thông tin những người nổi tiếng
+    // Khởi tạo một mảng chứa thông tin người
     Record class_records[] = {
-        {"Tom", "Cruise", 60},
-        {"Zendaya", "Coleman", 27},
-        {"Tom", "Holland", 27},
-        {"Millie", "Bobby Brown", 19},
+        {"Tom", "Messi", 60},
+        {"Cristiana", "Vinicius", 27},
+        {"Tom", "Florentino", 27},
+        {"Kylian", "Lukaka", 19},
         {"Keanu", "Reeves", 58},
         {"Iain", "Armitage", 15}
     };
@@ -77,17 +68,17 @@ int main() {
     printf("--- DANH SACH GOC ---\n");
     print_array(class_records, num_records);
 
-    // 1. Sắp xếp theo First Name
+    // Sắp xếp theo First Name
     printf("--- SAP XEP THEO FIRST NAME ---\n");
     qsort(class_records, num_records, sizeof(Record), compare_firstname);
     print_array(class_records, num_records);
 
-    // 2. Sắp xếp theo Last Name
+    //  Sắp xếp theo Last Name
     printf("--- SAP XEP THEO LAST NAME ---\n");
     qsort(class_records, num_records, sizeof(Record), compare_lastname);
     print_array(class_records, num_records);
 
-    // 3. Lọc ra những người lớn hơn 20 tuổi
+    //  những người > 20 tuổi
     printf("--- DANH SACH NHUNG NGUOI TREN 20 TUOI ---\n");
     apply(class_records, num_records, isolder);
     printf("\n");
