@@ -10,7 +10,6 @@ typedef struct {
 } Record;
 
 // YÊU CẦU 1: CÁC HÀM CALLBACK CHO QSORT
-
 // Hàm callback để sắp xếp theo Tên
 int compare_firstname(const void* pa, const void* pb) {
     // Ép kiểu con trỏ vô kiểu về lại con trỏ Record
@@ -30,7 +29,6 @@ int compare_lastname(const void* pa, const void* pb) {
 }
 
 // YÊU CẦU 2: HÀM APPLY VÀ ISOLDER
-
 // Hàm isolder: In ra màn hình nếu tuổi > 20
 void isolder(Record* rec) {
     if (rec->age > 20) {
@@ -60,8 +58,8 @@ int main() {
         {"Cristiana", "Vinicius", 27},
         {"Tom", "Florentino", 27},
         {"Kylian", "Lukaka", 19},
-        {"Keanu", "Reeves", 58},
-        {"Iain", "Armitage", 15}
+        {"Phan", "Quan", 58},
+        {"Mai", "Hong Vu", 36}
     };
     int num_records = sizeof(class_records) / sizeof(class_records[0]);
 
