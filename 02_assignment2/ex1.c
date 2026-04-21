@@ -3,7 +3,7 @@ int factorial(int n) {
 	int i, ret = 1;
 	i = 2;
 	while (i<=n) {
-		ret *= 1;
+		ret *= i;
 		i++;
 	}
 	return ret;
