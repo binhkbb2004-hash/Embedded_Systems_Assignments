@@ -5,7 +5,7 @@
 
 #define MAXVAL 100 // Kích thước tối đa của ngăn xếp
 
-int sp = 0;         // Stack pointer
+int sp = 0; // Stack pointer
 double val[MAXVAL]; // Mảng chứa các giá trị của ngăn xếp
 
 // Hàm đẩy một số vào ngăn xếp
@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
 
     // Duyệt qua từng đối số dòng lệnh
     for (int i = 1; i < argc; i++) {
-        // Nếu đối số bắt đầu bằng số, hoặc bắt đầu bằng dấu '-'
+        // Nếu đối số bắt đầu bằng số hoặc bắt đầu bằng dấu -
         if (isdigit(argv[i][0]) || (argv[i][0] == '-' && isdigit(argv[i][1]))) {
             push(atof(argv[i])); // Chuyển chuỗi thành số thập phân và đẩy vào Stack
         } 
@@ -72,7 +72,7 @@ int main(int argc, char *argv[]) {
     if (sp == 1) {
         printf("Ket qua: %g\n", pop());
     } else {
-        printf("Loi: Bieu thuc khong hop le (thieu toan tu hoac toan hang)\n");
+        printf("ERROR roi\n");
     }
 
     return 0;
